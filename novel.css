@@ -1,0 +1,85 @@
+.back {
+    width:100%;
+    position: absolute;
+    opacity: 0.5;
+}
+.bodytext {
+    position: absolute;
+}
+.nav-cal {
+    font-family: 'Noto Serif JP', serif;
+}
+.gif {
+    margin-left: 0.5%;
+    margin-right: 1% ;
+    background-color: transparent;
+}
+.heading {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 100px;
+    margin:  0.5%;
+}
+.header {
+    margin-bottom: 6%;
+    margin-top: 2%;
+    background: transparent;
+}
+.header1 {
+    font-family: 'Noto Serif JP', serif;
+    margin: 0 20% 0 20%;
+    text-align: justify;
+    text-align-last: center;
+}
+.header2 {
+    font-family: 'Noto Serif JP', serif;
+    margin: 0 20% 0 20%;
+    text-align: justify;
+}
+.script {
+    background-color: transparent;
+    height: 175px;
+    margin: 2.5%;
+    border: 2px solid #002B5B;
+    border-radius: 15px 50px;
+}
+.script1 {
+    margin-left: 9%;
+}
+.script2 {
+    margin-right: 8%;
+}
+.subscripts1 {
+    margin-top: 27%;
+    font-family: 'Noto Serif JP', serif;
+}
+.subscripts2 {
+    margin-top: 20%;
+    font-family: 'Noto Serif JP', serif;
+}
+a:link {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: #19A7CE;
+}
+.team-photo {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    float: left;
+    margin: 0 5% 0 0;
+}
+.grad1 {
+    background-image: linear-gradient(to bottom right,#ECF9FF, #C9EEFF, #97DEFF, #62CDFF);
+}
+.grad2 {
+    background-image: linear-gradient(to bottom left,#ECF9FF, #C9EEFF, #97DEFF, #62CDFF);
+}
+.grad3 {
+    background-image: linear-gradient(to top left,#ECF9FF, #C9EEFF, #97DEFF, #62CDFF);
+}
+.grad4 {
+    background-image: linear-gradient(to top right,#ECF9FF, #C9EEFF, #97DEFF, #62CDFF);
+}

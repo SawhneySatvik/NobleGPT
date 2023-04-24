@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NovelGPT-Code</title>
+    <link rel="stylesheet" href="novel.css">
+    <link rel="icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
+</head>
+<body class="grad2">
+
+    <nav class="navbar navbar-expand-sm bg-body-transparent">
+      <div class="container-fluid">
+        <img src="output-onlinegiftools.gif" width="45" class="gif">
+        <a class="navbar-brand nav-cal" href="index.html">NobleGPT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle nav-cal" role="button" data-bs-toggle="dropdown" aria-expanded="false">About</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item nav-cal" href="novelgpt.html">NobleGPT</a></li>
+                <li><a class="dropdown-item nav-cal" href="code.html">Code</a></li>
+                <li><a class="dropdown-item nav-cal" href="application.html">Applications</a></li>
+                <li><a class="dropdown-item nav-cal" href="team.html">Team Resilience</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active nav-cal" aria-current="page" href="index.html">Home</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+  </nav>
+
+    <h1 class="heading">Code</h1>
+    <br>
+
+    <div class="header3">
+      <h3 class="header2">Here is a small glance of the code of our program:</h3>
+      <br>
+      <h5 class="header2">
+import torch <br>
+import torch.nn as nn <br>
+from torch.nn import functional as F <br>
+<br>
+#hyper parameters <br>
+batch_size = 32 <br>
+chunk_size = 256 <br>
+max_iters = 5000 <br>
+eval_interval = 500 <br>
+learning_rate = 3e-4 <br>
+device = 'cuda' if torch.cuda.is_available() else 'cpu' <br>
+eval_iters = 200 <br>
+n_embd = 384 <br>
+n_head = 6 <br>
+n_layer = 6 <br>
+dropout = 0.2 <br>
+<br>
+# read it in to inspect it <br>
+with open(r'C:\Users\HP\Desktop\Study\Coding\Python\BIGGEST <br>
+PROJECT\input.txt', 'r', encoding='utf-8') as f: <br>
+&#160 &#160 text = f.read() <br>
+<br>
+# here are all the unique characters that occur in this text <br>
+chars = sorted(list(set(text))) <br>
+vocab_size = len(chars) <br>
+<br>
+#Encoder and decoder <br>
+stoi={ch:i for i,ch in enumerate(chars)} <br>
+itos={i:ch for i,ch in enumerate(chars)} <br>
+encode=lambda s:[stoi[c] for c in s] <br>
+decode=lambda l:''.join([itos[i] for i in l]) <br>
+data = torch.tensor(encode(text), dtype=torch.long) <br>
+<br>
+#Split up data into train and validation set <br>
+n=int(0.9*len(data)) <br>
+train_data = data[:n] <br>
+val_data = data[n:] <br>
+<br>
+#data loading <br>
+def get_batch(split): <br>
+# generate a small batch of data of inputs x and targets y <br>
+&#160 &#160 data = train_data if split == 'train' else val_data <br>
+&#160 &#160 ix = torch.randint(len(data) - chunk_size, (batch_size,)) <br>
+&#160 &#160 x = torch.stack([data[i:i+chunk_size] for i in ix]) <br>
+&#160 &#160 y = torch.stack([data[i+1:i+chunk_size+1] for i in ix]) <br>
+&#160 &#160 x,y = x.to(device), y.to(device) <br>
+&#160 &#160 return x, y <br>
+<br>
+@torch.no_grad()#to tell pytorch that everything in this function doesnot call backward(make it more memory efficient) <br>
+def estimate_loss():#finds average mean loss over multiple batchs so that the loss is much less noisy <br>
+&#160 &#160 out = {} <br>
+&#160 &#160 model.eval() <br>
+&#160 &#160 for split in ['train', 'val']: <br>
+&#160 &#160 &#160 &#160 losses = torch.zeros(eval_iters) <br>
+&#160 &#160 &#160 &#160 for k in range(eval_iters): <br>
+&#160 &#160 &#160 &#160 &#160 &#160 X, Y = get_batch(split) <br>
+&#160 &#160 &#160 &#160 &#160 &#160 logits, loss = model(X, Y) <br>
+&#160 &#160 &#160 &#160 &#160 &#160 losses[k] = loss.item() <br>
+&#160 &#160 &#160 &#160 out[split] = losses.mean() <br>
+&#160 &#160 model.train() <br>
+&#160 &#160 return out <br>
+<br>
+class Head(nn.Module): <br>
+&#160 &#160 def _init_(self,head_size): <br>
+&#160 &#160 &#160 &#160 super()._init_() <br>
+&#160 &#160 &#160 &#160 self.key = nn.Linear(n_embd, head_size, bias=False)#key vector show what does it contain before <br>
+&#160 &#160 &#160 &#160 self.query = nn.Linear(n_embd, head_size, bias=False)#query vector show what we want to predict <br>
+&#160 &#160 &#160 &#160 self.value = nn.Linear(n_embd,head_size, bias=False) <br>
+&#160 &#160 &#160 &#160 self.register_buffer('tril',torch.tril(torch.ones(chunk_size,chunk_size))) <br>
+&#160 &#160 &#160 &#160 self.dropout = nn.Dropout(dropout) <br>
+      </h5>
+    </div>
+    <br>
+    <br>
+    <br>
+
+</body>
+</html>
