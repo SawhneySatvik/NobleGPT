@@ -219,4 +219,4 @@ context = torch.tensor(encode(prompt), dtype=torch.long, device=device).unsqueez
 
 #generating from the model
 print(decode(m.generate(context, max_new_tokens=100)[0].tolist()))
-#open(r'C:\Users\HP\Desktop\Study\Coding\Python\BIGGEST PROJECT\Final\more1.txt', 'w').write(decode(m.generate(context, max_new_tokens=5000)[0].tolist()))
+#open(r'BIGGEST PROJECT\Final\more1.txt', 'w').write(decode(m.generate(context, max_new_tokens=5000)[0].tolist()))
