@@ -16,7 +16,7 @@ n_layer = 6
 dropout = 0.2
 
 # read it to inspect it
-with open(r'C:\Users\HP\Desktop\Study\Coding\Python\BIGGEST PROJECT\Final\input.txt', 'r', encoding='utf-8') as f:
+with open(r'BIGGEST PROJECT\Final\input.txt', 'r', encoding='utf-8') as f:
     text = f.read()
 
 # here are all the unique characters that occur in this text
